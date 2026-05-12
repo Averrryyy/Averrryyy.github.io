@@ -31,25 +31,29 @@
   <h1>Coworker Score test</h1>
     <div class = dropdown>
       <div id = "dropdownElements" class = "dropdownContent">
-        <div id = "section1" class = "questionSet1">
+        
+        <div id = "section1" class = "questionSet">
           <label>behaviours</label>
-          <ol start=" 1">
+          <ol id = "section1List" start=" 1">
                 <li> <input type="checkbox" id="1"> <label for="1"> Do you own more than ten items of branded merch? </label> </li> 
           </ol>
+        </div>
 
-        <div id = "section2" class = "questionSet1">
+        <div id = "section2" class = "questionSet">
           <label>misc</label>
           <ol start=" 1">
                 <li> <input type="checkbox" id="1"> <label for="1">  do you like musicals </label> </li> 
           </ol>
+        </div>
+
       </div>
-    </div>
-
-    <div>
       <h1 id="count" hidden>Result</h1>
-
-      <button id ="submit">Submit</button>
     </div>
+    <button id ="submit">Submit</button>
+
+  
+      
+    
     
   
 </body>
@@ -75,6 +79,8 @@
         }
     })
 
+    //need to loop through each section independently 
+    //code is not working atm, something about adding in either sections or lists broke it all. need to go through and figure that all out
     function countSelectedCheckboxes(){
       document.getElementById("count").setAttribute("hidden", "hidden");
       document.getElementById("dropdownElements").removeAttribute("hidden");
