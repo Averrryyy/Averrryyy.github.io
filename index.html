@@ -113,12 +113,16 @@
         </div>
 
       </div>
-      <h1 id="count1" hidden>Result</h1>
-      <h1 id="count2" hidden>Result</h1>
-      <h1 id="count3" hidden>Result</h1>
-      <h1 id="count4" hidden>Result</h1>
-      <h1 id="count5" hidden>Result</h1>
-      <h1 id="count6" hidden>Result</h1>
+
+      <div id = outputLabels>
+        <h1 id="count1" class="section1" hidden>Result</h1>
+        <h1 id="count2" class="section2" hidden>Result</h1>
+        <h1 id="count3" class="section3" hidden>Result</h1>
+        <h1 id="count4" class="section4" hidden>Result</h1>
+        <h1 id="count5" class="section5" hidden>Result</h1>
+        <h1 id="count6" class="section6" hidden>Result</h1>
+      </div>
+      
 
     </div>
     <button id ="submit">Submit</button>
@@ -132,19 +136,18 @@
 
 
   <script>
-    const numQuestions = document.querySelectorAll('#dropdownElements input').length
     var complete = false;
 
     const MyButton = document.getElementById("submit");
     MyButton.addEventListener('click', function() {
         if(complete === false){
           countSelectedCheckboxes();
-          document.getElementById("count").removeAttribute("hidden");
+          document.getElementById("outputLabels").removeAttribute("hidden");
           document.getElementById("dropdownElements").setAttribute("hidden", "hidden");
           document.getElementById("submit").innerHTML = "Reset";
           complete = true;
         }else {
-          document.getElementById("count").setAttribute("hidden", "hidden");
+          document.getElementById("outputLabels").setAttribute("hidden", "hidden");
           document.getElementById("dropdownElements").removeAttribute("hidden");
           document.getElementById("submit").innerHTML = "Submit";
           complete = false;
@@ -154,34 +157,24 @@
     //need to loop through each section independently 
     //code is not working atm, something about adding in either sections or lists broke it all. need to go through and figure that all out
     function countSelectedCheckboxes(){
-      document.getElementById("count").setAttribute("hidden", "hidden");
-      document.getElementById("dropdownElements").removeAttribute("hidden");
-      document.getElementById("submit").innerHTML = "Submit";
-      complete = false;
-
-
       //this is sloppy code use a for loop retard
-      var s1checkboxes = document.querySelectorAll('#section1 input[type="checkbox"]');
-      var s2checkboxes = document.querySelectorAll('#section2 input[type="checkbox"]');
-      var s3checkboxes = document.querySelectorAll('#section3 input[type="checkbox"]');
-      var s4checkboxes = document.querySelectorAll('#section4 input[type="checkbox"]');
-      var s5checkboxes = document.querySelectorAll('#section5 input[type="checkbox"]');
-      var s6checkboxes = document.querySelectorAll('#section6 input[type="checkbox"]');
-      
-      var count1 = 0;
-      var count2 = 0;
-      var count3 = 0;
-      var count4 = 0;
-      var count5 = 0;
-      var count6 = 0;
 
-      checkboxes.forEach(function(checkbox){
-          if(checkbox.checked){
-            count1++;
-          }
+      var sections = document.querySelectorAll('#dropdownElements div[class="questionSet"]')
+      //just need to handle multiple labels now which im still unclear on but ill sort it out
+      sections.forEach(function(sections){
+        var numQuestions = document.querySelectorAll('#'+ sections.id + ' input').length
+        var count = 0;
+        var items = document.querySelectorAll('#'+ sections.id + ' input[type="checkbox"]');
+          items.forEach(function(items){
+            if(items.checked){
+              count++;
+            }
+          }); 
+          var s = "count" + sections.id.substr(sections.id.length - 1);
+          var selectedCountLabel = document.getElementById(id=s);
+          selectedCountLabel.innerHTML= sections.id +" score:" + ((count /  numQuestions) * 100).toFixed(2) + "%";
+          selectedCountLabel.removeAttribute("hidden");
       });
-      var selectedCountLabel = document.getElementById(id="count1");
-      selectedCountLabel.innerHTML="Section 1 score:" + ((count1 /  numQuestions) * 100) + "%";
     }
 </script>
 
