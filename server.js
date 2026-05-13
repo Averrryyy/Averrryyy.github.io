@@ -1,3 +1,13 @@
+/**
+ *  Avery Robertson
+ *  Email:avery.br125@gmail.com
+ *  Github:Averrryyy
+ * 
+ *  this is the code for local testing of the website
+ *  this simple server only sends the quiz to the localhost
+ *  not to be used for actual deployment
+ */
+
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
